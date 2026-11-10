@@ -45,4 +45,12 @@ class AnswerTest {
         String line = Answer.secret("r5", "once/r5.json", Map.of("player", "Bo"));
         assertTrue(line.contains("\"secretFile\":\"once/r5.json\""), line);
     }
+
+    @Test
+    void pagesHaveItemsAndAStringCursorAsTheSpecSays() {
+        String mid = Answer.page("p1", java.util.List.of(java.util.Map.of("name", "Alex")), "50");
+        assertEquals("ea-result p1 {\"id\":\"p1\",\"ok\":true,\"items\":[{\"name\":\"Alex\"}],\"next\":\"50\"}", mid);
+        String last = Answer.page("p2", java.util.List.of(), null);
+        assertEquals("ea-result p2 {\"id\":\"p2\",\"ok\":true,\"items\":[],\"next\":null}", last);
+    }
 }

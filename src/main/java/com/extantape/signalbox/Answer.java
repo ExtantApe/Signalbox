@@ -24,6 +24,17 @@ public final class Answer {
         return line(id, m);
     }
 
+    /**
+     * One page of a list, in the spec's shape: {@code {"id","ok":true,"items":[...],"next":"<cursor>"|null}}. The cursor
+     * is an opaque string the caller passes back as-is; null means this is the last page.
+     */
+    public static String page(String id, List<?> items, String next) {
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("items", items);
+        m.put("next", next);
+        return ok(id, m);
+    }
+
     public static String error(String id, String code, String message) {
         Map<String, Object> m = new LinkedHashMap<>();
         m.put("id", id);
