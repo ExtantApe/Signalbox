@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  */
 public final class Request {
     public static final Pattern ID = Pattern.compile("[a-z0-9-]{1,36}");
+    private static final Pattern NEGATIVE_INT = Pattern.compile("-[0-9]{1,18}");
     private static final Pattern YES_ID = Pattern.compile("[a-z0-9-]{1,64}");
 
     private final String id;
@@ -79,7 +80,8 @@ public final class Request {
             rest = new ArrayList<>(rest.subList(0, q));
         }
         for (String t : rest) {
-            if (t.startsWith("-")) throw new Bad(Errors.BAD_ARGUMENT, "A value can't start with \"-\": " + t, id);
+            // A negative whole number is a value (the spec's int type); anything else starting with "-" could be a flag.
+            if (t.startsWith("-") && !NEGATIVE_INT.matcher(t).matches()) throw new Bad(Errors.BAD_ARGUMENT, "A value can't start with \"-\": " + t, id);
             if (t.equals("--json") || t.equals("--yes")) throw new Bad(Errors.BAD_ARGUMENT, "--json and --yes go after every other argument.", id);
         }
         return new Request(id, List.copyOf(rest), free, Set.copyOf(yes));
