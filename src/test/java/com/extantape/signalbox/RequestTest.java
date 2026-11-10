@@ -44,6 +44,15 @@ class RequestTest {
     }
 
     @Test
+    void negativeWholeNumbersAreValues() throws Exception {
+        Request r = parse("move gate1 world 45 -60 -12 --json m1");
+        assertEquals(List.of("move", "gate1", "world", "45", "-60", "-12"), r.tokens());
+        assertThrows(Request.Bad.class, () -> parse("move -60x --json m2"), "only whole numbers");
+        assertThrows(Request.Bad.class, () -> parse("move - --json m3"), "a lone dash isn't a number");
+        assertThrows(Request.Bad.class, () -> parse("move --60 --json m4"), "two dashes are a flag");
+    }
+
+    @Test
     void idsAreChecked() {
         assertThrows(Request.Bad.class, () -> parse("list --json Has_Caps"));
         assertThrows(Request.Bad.class, () -> parse("list --json " + "a".repeat(37)));

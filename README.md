@@ -2,7 +2,7 @@
 
 Signalbox is a tiny library for Paper plugins. It lets a plugin's own commands answer tools such as Leaf Juice, with replies a player can't fake and secrets that never reach the server log. Plugins shade it in; it isn't a plugin itself.
 
-**Status:** 0.3.0. Its 21 unit tests cover every rule the library enforces itself; the ones a plugin has to keep, such as answering every request, are tested in the plugins that use it. The console line format was checked on throwaway Paper 26.1.2, 26.2 and 26.3 servers. Latchkey 0.2.0 uses 0.1.0, Usher 0.4.0 uses 0.2.0, and Usher 0.4.1 is the first to use 0.3.0.
+**Status:** 0.3.1. Its 22 unit tests cover every rule the library enforces itself; the ones a plugin has to keep, such as answering every request, are tested in the plugins that use it. The console line format was checked on throwaway Paper 26.1.2, 26.2 and 26.3 servers. 0.3.1 accepts negative whole numbers as values, as the spec's `int` type says; 0.3.0 refused them, which broke coordinates such as `-60`.
 
 ## What it does
 
