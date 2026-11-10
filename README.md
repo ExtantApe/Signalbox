@@ -2,7 +2,7 @@
 
 Signalbox is a tiny library for Paper plugins. It lets a plugin's own commands answer tools such as Leaf Juice, with replies a player can't fake and secrets that never reach the server log. Plugins shade it in; it isn't a plugin itself.
 
-**Status:** 0.1.0, the first release. Its 18 unit tests cover every rule the library enforces itself; the ones a plugin has to keep, such as answering every request, get tested in the first plugin that uses it. The console line format was checked on throwaway Paper 26.1.2, 26.2 and 26.3 servers. No plugin uses it yet: Latchkey is the first, then Usher.
+**Status:** 0.2.0. Its 20 unit tests cover every rule the library enforces itself; the ones a plugin has to keep, such as answering every request, are tested in the plugins that use it. The console line format was checked on throwaway Paper 26.1.2, 26.2 and 26.3 servers. Latchkey 0.2.0 uses 0.1.0; Usher 0.4.0 is the first to use 0.2.0.
 
 ## What it does
 
@@ -17,7 +17,7 @@ ea-result <id> {"id":"<id>","ok":true,…}
 - **One line, plain ASCII.** Control characters and anything non-ASCII are written as `\uXXXX`, and a line is never longer than 8 KB.
 - **Confirm questions as data.** A change that needs a yes answers `{"ok":false,"needs":[{"id","question"}]}` and changes nothing. Send it again with `--yes id1,id2`.
 - **No secrets in logs.** Paper writes console output to `logs/latest.log`, so a secret, such as an invite code, goes to `plugins/<Plugin>/once/<id>.json` instead. That folder is 0700 and the file is 0600, written atomically, and the answer only points to it. The reader deletes the file; anything left is deleted after 5 minutes.
-- **`describe`.** Each plugin can list its commands, their typed arguments, their confirm questions and which ones return a secret, with a format version readers check.
+- **`describe`.** Each plugin can list its commands, their typed arguments, their confirm questions and which ones return a secret, with a format version readers check. An argument that may be left out carries `"optional": true` (new in 0.2.0, still format 1). Optional arguments only come last, so a reader can always tell which slot a value fills; `Describe.body` refuses anything else.
 
 Arguments are plain tokens, never JSON:
 
@@ -41,7 +41,7 @@ Add JitPack and shade it, relocated, so two plugins never clash. This hasn't bee
 
 ```kotlin
 repositories { maven("https://jitpack.io") }
-dependencies { implementation("com.github.ExtantApe:Signalbox:v0.1.0") }
+dependencies { implementation("com.github.ExtantApe:Signalbox:v0.2.0") }
 // with the Shadow plugin:
 tasks.shadowJar { relocate("com.extantape.signalbox", "your.plugin.libs.signalbox") }
 ```
