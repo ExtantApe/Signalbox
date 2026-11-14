@@ -14,7 +14,7 @@ What changed: optional arguments in `describe` (0.2.0), `Answer.page` (0.3.0), n
 
 **Gap found and fixed:** 0.1.0's first audit listed "no value starting with `-`" as a promise. The spec's `int` type allows a leading `-`, so that row was wrong and the code with it. Waystation's acceptance suite caught it (`/gate create ... 40 -60 40`); 0.3.1 fixed it, with a test. 22 unit tests pass.
 
-**Still tested in the plugins, not here:** one answer per request, permission refusals and `describe` matching the registered commands (Latchkey, Usher, Waystation, HouseRules each test their own).
+**Still tested in the plugins, not here:** one answer per request, permission refusals and `describe` matching the registered commands (WelcomeWagon, Usher, Waystation, Mayor each test their own).
 
 ## 2026-11-09: first audit (at 0.1.0)
 
@@ -31,4 +31,4 @@ What changed: optional arguments in `describe` (0.2.0), `Answer.page` (0.3.0), n
 | `describe` carries the format and typed arguments | `DescribeTest` |
 | The console line has no prefix on Paper 26.1.2, 26.2 and 26.3 | checked on throwaway servers 2026-11-09 (spec, "Verified on Paper") |
 
-**Not yet covered (no plugin uses Signalbox yet):** that a plugin answers every request including unknown subcommands, and that `latest.log` never contains a secret. Both need a plugin on a real server; they become bot tests in Latchkey 0.2.0, the first user.
+**Not yet covered (no plugin uses Signalbox yet):** that a plugin answers every request including unknown subcommands, and that `latest.log` never contains a secret. Both need a plugin on a real server; they become bot tests in WelcomeWagon 0.2.0, the first user.
