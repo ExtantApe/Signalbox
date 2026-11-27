@@ -2,6 +2,10 @@
 
 Kept by this repo's owning session (Minecraft: Plugins Lead), per `~/Code/CLAUDE.md`, "Test self-audits". Newest first.
 
+## 2026-11-26: 14-day check, no behavior change
+
+Only commit since 2026-11-10: 6b95db2, other plugins' new names in docs, examples and tests. No code path changed, so the table below still stands. Gaps added: none. Gaps skipped: none new.
+
 ## 2026-11-10: after 0.2.0, 0.3.0 and 0.3.1
 
 What changed: optional arguments in `describe` (0.2.0), `Answer.page` (0.3.0), negative whole numbers as values (0.3.1).
